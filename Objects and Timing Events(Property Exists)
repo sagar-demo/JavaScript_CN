@@ -1,0 +1,55 @@
+Implement a function propertyExists(obj, path) that takes in an object and a path (string) as arguments and returns ‘False’ if the property doesn’t exist on that object or is null, else returns the value of the property.
+Note: Since path is not a property of obj. In this question path is a string of properties.
+Sample Input :
+1  {"a":{"b":"dadsa"}} ac
+Expected Output :
+false
+Sample Input :
+2
+{"a":{"b":"dadsa"}} ac
+{"a":{"b":"dadsa"}} ab
+Expected Output :
+false
+dadsa
+___________________________________________
+//Write your function here
+
+
+function propertyExists(obj,path) {
+    // Write logic here
+    var val=obj;
+    for(a of path){
+        val=val[a];
+        if(!val)
+            return false;
+    }
+    return val;
+}
+
+
+
+// Input and output has already been handled for you
+
+
+
+process.stdin.resume();
+process.stdin.setEncoding('utf8');
+
+let remainder = '';
+process.stdin.on('data', function (chunk) {
+  let lines = chunk.toString().split(' ')
+    let t = parseInt(lines[0]);
+    for (let i=0;i<t;i++) {
+      let obj = lines[(i*2)+1];
+      let str = lines[(i*2)+2];
+      let arr = []
+      for(let c of str) {
+          if(c === '\r' || c === '\n') continue
+          arr.push(c)
+      }
+      let ans = propertyExists(JSON.parse(obj),arr)
+      process.stdout.write(ans.toString()+'\n');
+    }
+
+    process.exit()
+});
